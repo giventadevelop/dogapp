@@ -1,0 +1,33 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "dogbreed",
+            "otherEntityName": "dogBreed",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "dog"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "dogName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "votes",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "dogPicture",
+            "fieldType": "byte[]"
+        }
+    ],
+    "changelogDate": "20170523023755",
+    "javadoc": "The Dog entity.",
+    "entityTableName": "dog",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl"
+}

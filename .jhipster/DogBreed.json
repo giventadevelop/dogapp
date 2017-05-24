@@ -1,0 +1,16 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "breedName",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20170523023754",
+    "javadoc": "The DogBreed entity.",
+    "entityTableName": "dog_breed",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl"
+}

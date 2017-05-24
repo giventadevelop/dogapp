@@ -1,0 +1,24 @@
+{
+    "dogappApp": {
+        "dog" : {
+            "home": {
+                "title": "Dogs",
+                "createLabel": "Créer un nouveau Dog",
+                "createOrEditLabel": "Créer ou éditer un Dog"
+            },
+            "created": "Un nouveau Dog a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Dog avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Dog avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Dog {{ id }} ?"
+            },
+            "detail": {
+                "title": "Dog"
+            },
+            "dogName": "Dog Name",
+            "votes": "Votes",
+            "dogPicture": "Dog Picture",
+            "dogbreed": "Dogbreed"
+        }
+    }
+}

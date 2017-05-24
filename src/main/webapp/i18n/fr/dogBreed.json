@@ -1,0 +1,21 @@
+{
+    "dogappApp": {
+        "dogBreed" : {
+            "home": {
+                "title": "DogBreeds",
+                "createLabel": "Créer un nouveau Dog Breed",
+                "createOrEditLabel": "Créer ou éditer un Dog Breed"
+            },
+            "created": "Un nouveau Dog Breed a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Dog Breed avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Dog Breed avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Dog Breed {{ id }} ?"
+            },
+            "detail": {
+                "title": "Dog Breed"
+            },
+            "breedName": "Breed Name"
+        }
+    }
+}

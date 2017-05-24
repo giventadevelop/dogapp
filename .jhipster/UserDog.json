@@ -1,0 +1,25 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "dog",
+            "otherEntityName": "dog",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "userDog"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "username",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20170523023756",
+    "javadoc": "The UserDog entity.",
+    "entityTableName": "user_dog",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl"
+}

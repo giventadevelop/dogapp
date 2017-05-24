@@ -1,0 +1,31 @@
+/**
+* The DogBreed entity.
+*/
+entity DogBreed {
+    breedName String
+ }
+/**
+* The Dog entity.
+*/
+entity Dog {
+    dogName String,
+    votes Long,
+    dogPicture ImageBlob
+ }                 
+/**
+* The UserDog entity.
+*/
+entity UserDog {
+       username String
+ }
+// defining multiple  relationships  for Dogs  with comments
+relationship OneToOne {
+     Dog{dogbreed} to DogBreed,
+     UserDog{dog} to Dog
+}
+// Set pagination options
+paginate Dog with pagination
+dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl

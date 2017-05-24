@@ -1,0 +1,22 @@
+{
+    "dogappApp": {
+        "userDog" : {
+            "home": {
+                "title": "UserDogs",
+                "createLabel": "Créer un nouveau User Dog",
+                "createOrEditLabel": "Créer ou éditer un User Dog"
+            },
+            "created": "Un nouveau User Dog a été créé avec l'identifiant {{ param }}",
+            "updated": "Le User Dog avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le User Dog avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le User Dog {{ id }} ?"
+            },
+            "detail": {
+                "title": "User Dog"
+            },
+            "username": "Username",
+            "dog": "Dog"
+        }
+    }
+}

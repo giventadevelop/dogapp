@@ -1,0 +1,65 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myDogLabel" data-translate="dogappApp.dog.home.createOrEditLabel">Create or edit a Dog</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.dog.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.dog.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="dogappApp.dog.dogName" for="field_dogName">Dog Name</label>
+            <input type="text" class="form-control" name="dogName" id="field_dogName"
+                    ng-model="vm.dog.dogName"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="dogappApp.dog.votes" for="field_votes">Votes</label>
+            <input type="number" class="form-control" name="votes" id="field_votes"
+                    ng-model="vm.dog.votes"
+                    />
+        </div>
+        <div class="form-group" ngf-drop ngf-change="vm.setDogPicture($file, vm.dog)">
+            <label class="control-label" data-translate="dogappApp.dog.dogPicture" for="field_dogPicture">Dog Picture</label>
+            <div>
+                <div ng-if="vm.dog.dogPicture" class="help-block clearfix">
+                    <span class="pull-left">{{vm.dog.dogPictureContentType}}, {{vm.byteSize(vm.dog.dogPicture)}}</span>
+                    <button type="button" ng-click="vm.dog.dogPicture=null;vm.dog.dogPictureContentType=null;"
+                            class="btn btn-default btn-xs pull-right">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </div>
+                <button type="button" ngf-select class="btn btn-default btn-block"
+                        ngf-change="vm.setDogPicture($file, vm.dog)" data-translate="entity.action.addblob">
+                    Add blob
+                </button>
+            </div>
+            <input type="hidden" class="form-control" name="dogPicture" id="field_dogPicture"
+                    ng-model="vm.dog.dogPicture"
+                    />
+            <input type="hidden" class="form-control" name="dogPictureContentType" id="field_dogPictureContentType"
+                    ng-model="vm.dog.dogPictureContentType" />
+        </div>
+
+        <div class="form-group">
+            <label data-translate="dogappApp.dog.dogbreed" for="field_dogbreed">Dogbreed</label>
+            <select class="form-control" id="field_dogbreed" name="dogbreed" ng-model="vm.dog.dogbreedId" ng-options="dogBreed.id as dogBreed.id for dogBreed in vm.dogbreeds | orderBy:'id'">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

@@ -1,0 +1,35 @@
+
+<div>
+    <h2><span data-translate="dogappApp.dog.detail.title">Dog</span> {{vm.dog.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="dogappApp.dog.dogName">Dog Name</span></dt>
+        <dd>
+            <span>{{vm.dog.dogName}}</span>
+        </dd>
+        <dt><span data-translate="dogappApp.dog.votes">Votes</span></dt>
+        <dd>
+            <span>{{vm.dog.votes}}</span>
+        </dd>
+        <dt><span data-translate="dogappApp.dog.dogPicture">Dog Picture</span></dt>
+        <dd>
+            <span>{{vm.dog.dogPicture}}</span>
+        </dd>
+        <dt><span data-translate="dogappApp.dog.dogbreed">Dogbreed</span></dt>
+        <dd>
+            <a ui-sref="dog-breed-detail({id:vm.dog.dogbreedId})">{{vm.dog.dogbreedId}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="dog-detail.edit({id:vm.dog.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

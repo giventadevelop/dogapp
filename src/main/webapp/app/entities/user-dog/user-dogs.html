@@ -1,0 +1,60 @@
+<div>
+    <h2 data-translate="dogappApp.userDog.home.title">User Dogs</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="user-dog.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span  data-translate="dogappApp.userDog.home.createLabel">
+                        Create new User Dog
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr>
+                    <th><span data-translate="global.field.id">ID</span></th>
+                    <th><span data-translate="dogappApp.userDog.username">Username</span></th>
+                    <th><span data-translate="dogappApp.userDog.dog">Dog</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="userDog in vm.userDogs track by userDog.id">
+                    <td><a ui-sref="user-dog-detail({id:userDog.id})">{{userDog.id}}</a></td>
+                    <td>{{userDog.username}}</td>
+                    <td>
+                        <a ui-sref="dog-detail({id:userDog.dogId})">{{userDog.dogId}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="user-dog-detail({id:userDog.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="user-dog.edit({id:userDog.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="user-dog.delete({id:userDog.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
