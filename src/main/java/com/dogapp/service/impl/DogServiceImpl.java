@@ -4,10 +4,12 @@ import com.dogapp.service.DogService;
 import com.dogapp.domain.Dog;
 import com.dogapp.repository.DogRepository;
 import com.dogapp.service.dto.DogDTO;
+import com.dogapp.service.dto.GroupByDogBreedDTO;
 import com.dogapp.service.mapper.DogMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
@@ -60,7 +62,8 @@ public class DogServiceImpl implements DogService{
     public Page<DogDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Dogs");
         Page<Dog> result = dogRepository.findAll(pageable);
-        return result.map(dog -> dogMapper.dogToDogDTO(dog));
+        
+                return result.map(dog -> dogMapper.dogToDogDTO(dog));
     }
 
     /**
@@ -87,5 +90,23 @@ public class DogServiceImpl implements DogService{
     public void delete(Long id) {
         log.debug("Request to delete Dog : {}", id);
         dogRepository.delete(id);
+    }
+    
+    /**
+     *  Get all Dogs GROUP BY breed.
+     *  
+     *  @param pageable the pagination information
+     *  @return the list of entities
+     */
+    @SuppressWarnings("unchecked")
+	public Page<GroupByDogBreedDTO> getAllDogsBreedsGroupBy(Pageable pageable) {
+        log.debug("Request to get all Dogs");
+        List<GroupByDogBreedDTO> groupByDogBreedResult = dogRepository.getGroupByDogBreed();
+        System.out.println("groupByDogBreedResult "+ groupByDogBreedResult.size());
+       // return result.map(dog -> dogMapper.dogToDogDTO(dog));
+        // return (Page<GroupByDogBreedDTO>) groupByDogBreedResult;
+        final int currentTotal=pageable.getOffset() + pageable.getPageSize();
+        return new PageImpl(groupByDogBreedResult,pageable,currentTotal);
+    
     }
 }

@@ -5,6 +5,8 @@ import com.dogapp.service.DogService;
 import com.dogapp.web.rest.util.HeaderUtil;
 import com.dogapp.web.rest.util.PaginationUtil;
 import com.dogapp.service.dto.DogDTO;
+import com.dogapp.service.dto.GroupByDogBreedDTO;
+
 import io.swagger.annotations.ApiParam;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -123,6 +125,22 @@ public class DogResource {
         log.debug("REST request to delete Dog : {}", id);
         dogService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
+    
+    // --  Dogs GROUP BY breed ---
+    /**
+     * GET  /dogs/breed/groupby : get all the Dogs GROUP BY breed.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of dogs in body
+     */
+    @GetMapping("/dogs/breed/groupby")
+    @Timed
+    public ResponseEntity<List<GroupByDogBreedDTO>> getAllDogsBreedsGroupBy(@ApiParam Pageable pageable) {
+        log.debug("REST request to get a page of dog breeds GROUP BY");
+        Page<GroupByDogBreedDTO> page = dogService.getAllDogsBreedsGroupBy(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/dogs/breed/groupby");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
 }
