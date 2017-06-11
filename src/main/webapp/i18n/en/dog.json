@@ -18,7 +18,9 @@
             "dogName": "Dog Name",
             "votes": "Votes",
             "dogPicture": "Dog Picture",
-            "dogbreed": "Dogbreed"
+            "dogbreed": "Dogbreed",
+            "dogWebUrl": "Dog Web Url",
+            "dogRestUrl": "Dog Rest Url"
         }
     }
 }

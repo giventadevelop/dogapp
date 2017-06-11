@@ -1,0 +1,49 @@
+
+<div>
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myDogLabel" data-translate="dogappApp.dog.detail.title">Dog</h4>
+    </div>
+   
+    <hr>
+      <div class="modal-body">
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="dogappApp.dog.dogName">Dog Name</span></dt>
+        <dd>
+            <span>{{vm.dog.dogName}}</span>
+        </dd>
+        <dt><span data-translate="dogappApp.dog.votes">Votes</span></dt>
+        <dd>
+            <span>{{vm.dog.votes}}</span>
+        </dd>
+        <dt><span data-translate="dogappApp.dog.dogWebUrl">Dog Web Url</span></dt>
+        <dd>
+             <span>{{vm.URLObject.entityHref}}</span>
+        </dd>
+        <dt><span data-translate="dogappApp.dog.dogRestUrl">Dog Rest Url</span></dt>
+        <dd>
+            <span>{{vm.URLObject.protocol}}//{{vm.URLObject.host}}/api/dogs/image/{{vm.dog.id}}</span>
+           
+        </dd>
+        <dt><span data-translate="dogappApp.dog.dogPicture">Dog Picture</span></dt>
+        <dd>
+            <span> <img  style="height:200px;width:300px;border-width:0px;" 
+	alt="dog image" src="api/dogs/image/{{vm.dog.id}}" title="dog image"></span>
+        </dd>
+        <dt><span data-translate="dogappApp.dog.dogbreed">Dogbreed</span></dt>
+        <dd>
+            <a ui-sref="dog-breed-detail({id:vm.dog.dogbreedId})">{{vm.dog.dogbreedId}}</a>
+        </dd>
+    </dl>
+ </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+      <!--  <button type="button" ui-sref="dog-detail.edit({id:vm.dog.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button> -->
+</div>

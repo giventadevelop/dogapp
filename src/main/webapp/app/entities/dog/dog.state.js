@@ -51,7 +51,7 @@
                 }]
             }
         })
-        .state('dog-detail', {
+      /* .state('dog-detail', {
             parent: 'dog',
             url: '/dog/{id}',
             data: {
@@ -82,7 +82,7 @@
                     return currentStateData;
                 }]
             }
-        })
+        })*/
         .state('dog-detail.edit', {
             parent: 'dog-detail',
             url: '/detail/edit',
@@ -148,6 +148,32 @@
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
                     templateUrl: 'app/entities/dog/dog-dialog.html',
+                    controller: 'DogDialogController',
+                    controllerAs: 'vm',
+                    backdrop: 'static',
+                    size: 'lg',
+                    resolve: {
+                        entity: ['Dog', function(Dog) {
+                            return Dog.get({id : $stateParams.id}).$promise;
+                        }]
+                    }
+                }).result.then(function() {
+                    $state.go('dog', null, { reload: 'dog' });
+                }, function() {
+                    $state.go('^');
+                });
+            }]
+        })
+        .state('dog-detail', {
+        	parent: 'dog',
+            url: '/dog/{id}',
+            data: {
+                authorities: ['ROLE_USER'],
+                pageTitle: 'dogappApp.dog.detail.title'
+            },
+            onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                $uibModal.open({
+                	templateUrl: 'app/entities/dog/dog-detail-dialog.html',
                     controller: 'DogDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',

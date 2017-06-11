@@ -31,7 +31,9 @@
                     <td><a ui-sref="dog-detail({id:dog.id})">{{dog.id}}</a></td>
                     <td>{{dog.dogName}}</td>
                     <td>{{dog.votes}}</td>
-                    <td>{{dog.dogPicture}}</td>
+                    <td><img  style="height:50px;width:50px;border-width:0px;" 
+	alt="dog image" src="api/dogs/image/{{dog.id}}" title="dog image"></td>
+                 
                     <td>
                         <a ui-sref="dog-breed-detail({id:dog.dogbreedId})">{{dog.dogbreedId}}</a>
                     </td>

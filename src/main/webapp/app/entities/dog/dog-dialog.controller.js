@@ -14,6 +14,8 @@
         vm.clear = clear;
         vm.byteSize = DataUtils.byteSize;
         vm.openFile = DataUtils.openFile;
+        vm.hostName = location;
+        vm.URLObject = parseURL(location);
         vm.save = save;
         vm.dogbreeds = DogBreed.query({filter: 'dog-is-null'});
         $q.all([vm.dog.$promise, vm.dogbreeds.$promise]).then(function() {
@@ -51,6 +53,33 @@
         function onSaveError () {
             vm.isSaving = false;
         }
+        
+        
+        function parseURL(url) {
+            var parser = document.createElement('a'),
+                searchObject = {},
+                queries, split, i;
+            // Let the browser do the work
+            parser.href = url;
+            // Convert query string to object
+            queries = parser.search.replace(/^\?/, '').split('&');
+            for( i = 0; i < queries.length; i++ ) {
+                split = queries[i].split('=');
+                searchObject[split[0]] = split[1];
+            }
+            return {
+                protocol: parser.protocol,
+                host: parser.host,
+                entityHref: parser.href,
+                hostname: parser.hostname,
+                port: parser.port,
+                pathname: parser.pathname,
+                search: parser.search,
+                searchObject: searchObject,
+                hash: parser.hash
+            };
+        }
+        
 
 
         vm.setDogPicture = function ($file, dog) {

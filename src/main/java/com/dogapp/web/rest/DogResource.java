@@ -18,12 +18,17 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * REST controller for managing Dog.
@@ -112,6 +117,32 @@ public class DogResource {
         DogDTO dogDTO = dogService.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(dogDTO));
     }
+    
+    
+    /**
+     * GET  /dogs/:id : get the "id" dog.
+     *
+     * @param id the id of the dogDTO to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the dogDTO, or with status 404 (Not Found)
+     */
+    @GetMapping("/dogs/image/{id}")
+    @Timed
+    public void getDogImage(@PathVariable Long id,final HttpServletResponse response) {
+    	 log.debug("REST request to get Dog Image: {}", id);
+    	DogDTO dogDTO = dogService.findOne(id);
+    	ServletOutputStream outStream;
+		try {
+			outStream = response.getOutputStream();
+			byte[] bufferImage = dogDTO.getDogPicture();
+	    	response.setContentType("image/jpeg");
+	    	outStream.write(bufferImage);
+	    	outStream.flush();     
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+   
+       }
 
     /**
      * DELETE  /dogs/:id : delete the "id" dog.
