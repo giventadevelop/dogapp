@@ -1,6 +1,7 @@
 package com.dogapp.service;
 
 import com.dogapp.service.dto.DogDTO;
+import com.dogapp.service.dto.DogUserDogDTO;
 import com.dogapp.service.dto.GroupByDogBreedDTO;
 
 import org.springframework.data.domain.Page;
@@ -46,10 +47,17 @@ public interface DogService {
     
     /**
      *  Get all Dogs GROUP BY breed.
-     *  
      *  @param pageable the pagination information
-     *  @return the list of entities
+     *  @return the list of GroupByDogBreedDTO entities
      */
     Page<GroupByDogBreedDTO> getAllDogsBreedsGroupBy(Pageable pageable);
+
+    /**
+     *  Get all Dogs with votes included at user_dog table.
+     *  @param pageable the pagination information
+     *  @param loggedInUserName the l
+     *  @return the list of GroupByDogBreedDTO entities
+     */
+	Page<DogUserDogDTO> getDogUserDog(Pageable pageable,String loggedInUserName);
    
 }

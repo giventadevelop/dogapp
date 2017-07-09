@@ -58,17 +58,24 @@
         <scala.version>2.12.1</scala.version>
         <sonar-maven-plugin.version>3.2</sonar-maven-plugin.version>
 
-        <sonar.exclusions>src/main/webapp/content/**/*.*, src/main/webapp/bower_components/**/*.*, src/main/webapp/i18n/*.js, target/www/**/*.*</sonar.exclusions>
+        <sonar.exclusions>src/main/webapp/content/**/*.*,
+			src/main/webapp/bower_components/**/*.*, src/main/webapp/i18n/*.js,
+			target/www/**/*.*</sonar.exclusions>
 
         <sonar.issue.ignore.multicriteria>S3437,UndocumentedApi,BoldAndItalicTagsCheck</sonar.issue.ignore.multicriteria>
 
-        <!-- Rule https://sonarqube.com/coding_rules#rule_key=Web%3ABoldAndItalicTagsCheck is ignored. Even if we agree that using the "i" tag is an awful practice, this is what is recommended by http://fontawesome.io/examples/ -->
+        <!-- Rule https://sonarqube.com/coding_rules#rule_key=Web%3ABoldAndItalicTagsCheck 
+			is ignored. Even if we agree that using the "i" tag is an awful practice, 
+			this is what is recommended by http://fontawesome.io/examples/ -->
         <sonar.issue.ignore.multicriteria.BoldAndItalicTagsCheck.resourceKey>src/main/webapp/app/**/*.*</sonar.issue.ignore.multicriteria.BoldAndItalicTagsCheck.resourceKey>
         <sonar.issue.ignore.multicriteria.BoldAndItalicTagsCheck.ruleKey>Web:BoldAndItalicTagsCheck</sonar.issue.ignore.multicriteria.BoldAndItalicTagsCheck.ruleKey>
-        <!-- Rule https://sonarqube.com/coding_rules#rule_key=squid%3AS3437 is ignored, as a JPA-managed field cannot be transient -->
+        <!-- Rule https://sonarqube.com/coding_rules#rule_key=squid%3AS3437 is 
+			ignored, as a JPA-managed field cannot be transient -->
         <sonar.issue.ignore.multicriteria.S3437.resourceKey>src/main/java/**/*</sonar.issue.ignore.multicriteria.S3437.resourceKey>
         <sonar.issue.ignore.multicriteria.S3437.ruleKey>squid:S3437</sonar.issue.ignore.multicriteria.S3437.ruleKey>
-        <!-- Rule http://sonarqube.com/coding_rules#rule_key=squid%3AUndocumentedApi is ignored, as we want to follow "clean code" guidelines and classes, methods and arguments names should be self-explanatory -->
+        <!-- Rule http://sonarqube.com/coding_rules#rule_key=squid%3AUndocumentedApi 
+			is ignored, as we want to follow "clean code" guidelines and classes, methods 
+			and arguments names should be self-explanatory -->
         <sonar.issue.ignore.multicriteria.UndocumentedApi.resourceKey>src/main/java/**/*</sonar.issue.ignore.multicriteria.UndocumentedApi.resourceKey>
         <sonar.issue.ignore.multicriteria.UndocumentedApi.ruleKey>squid:UndocumentedApi</sonar.issue.ignore.multicriteria.UndocumentedApi.ruleKey>
 
@@ -135,6 +142,13 @@
         <dependency>
             <groupId>com.zaxxer</groupId>
             <artifactId>HikariCP</artifactId>
+        </dependency>
+        <!-- jhipster-needle-maven-add-dependency -->
+
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.9</version>
         </dependency>
 
         <dependency>
@@ -359,7 +373,7 @@
             <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <!-- jhipster-needle-maven-add-dependency -->
+
     </dependencies>
     <build>
         <defaultGoal>spring-boot:run</defaultGoal>
@@ -373,11 +387,9 @@
         </testResources>
         <pluginManagement>
             <plugins>
-                <!--
-                    This plugin's configuration is used to store Eclipse m2e settings only.
-                    It has no influence on the Maven build itself.
-                    Remove when the m2e plugin can correctly bind to Maven lifecycle
-                -->
+                <!-- This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. Remove when the m2e 
+					plugin can correctly bind to Maven lifecycle -->
                 <plugin>
                     <groupId>org.eclipse.m2e</groupId>
                     <artifactId>lifecycle-mapping</artifactId>
@@ -495,11 +507,13 @@
                 <configuration>
                     <rules>
                         <requireMavenVersion>
-                            <message>You are running an older version of Maven. JHipster requires at least Maven ${maven.version}</message>
+                            <message>You are running an older version of Maven. JHipster
+								requires at least Maven ${maven.version}</message>
                             <version>[${maven.version},)</version>
                         </requireMavenVersion>
                         <requireJavaVersion>
-                            <message>You are running an older version of Java. JHipster requires at least JDK ${java.version}</message>
+                            <message>You are running an older version of Java. JHipster
+								requires at least JDK ${java.version}</message>
                             <version>[${java.version}.0,)</version>
                         </requireJavaVersion>
                     </rules>
@@ -589,7 +603,8 @@
                             <destFile>${project.testresult.directory}/coverage/jacoco/jacoco.exec</destFile>
                         </configuration>
                     </execution>
-                    <!-- Ensures that the code coverage report for unit tests is created after unit tests have been run -->
+                    <!-- Ensures that the code coverage report for unit tests is created 
+						after unit tests have been run -->
                     <execution>
                         <id>post-unit-test</id>
                         <phase>test</phase>
@@ -653,10 +668,8 @@
                 <configuration>
                     <executable>true</executable>
                     <fork>true</fork>
-                    <!--
-                    Enable the line below to have remote debugging of your application on port 5005
-                    <jvmArguments>-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005</jvmArguments>
-                    -->
+                    <!-- Enable the line below to have remote debugging of your application 
+						on port 5005 <jvmArguments>-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005</jvmArguments> -->
                 </configuration>
             </plugin>
             <!-- jhipster-needle-maven-add-plugin -->
@@ -814,15 +827,11 @@
             </dependencies>
         </profile>
         <profile>
-            <!--
-                Profile for doing "continuous compilation" with the Scala Maven plugin.
-                It allows automatic compilation of Java classes as soon as they are saved.
-                To use it, run in 3 terminals:
-                - './mvnw -Pcc scala:cc' for continous compilation of your classes
-                - './mvnw -Pcc' for hot reload of Spring boot
-                - 'gulp' for hot reload of the HTML/JavaScript assets
-                Everything should hot reload automatically!
-            -->
+            <!-- Profile for doing "continuous compilation" with the Scala Maven plugin. 
+				It allows automatic compilation of Java classes as soon as they are saved. 
+				To use it, run in 3 terminals: - './mvnw -Pcc scala:cc' for continous compilation 
+				of your classes - './mvnw -Pcc' for hot reload of Spring boot - 'gulp' for 
+				hot reload of the HTML/JavaScript assets Everything should hot reload automatically! -->
             <id>cc</id>
             <build>
                 <plugins>
@@ -882,10 +891,8 @@
                             <executable>true</executable>
                             <fork>true</fork>
                             <addResources>true</addResources>
-                            <!--
-                            Enable the line below to have remote debugging of your application on port 5005
-                            <jvmArguments>-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005</jvmArguments>
-                            -->
+                            <!-- Enable the line below to have remote debugging of your application 
+								on port 5005 <jvmArguments>-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005</jvmArguments> -->
                         </configuration>
                     </plugin>
                 </plugins>
@@ -909,9 +916,7 @@
             </dependencies>
         </profile>
         <profile>
-            <!--
-                Profile for monitoring the application with Graphite.
-            -->
+            <!-- Profile for monitoring the application with Graphite. -->
             <id>graphite</id>
             <dependencies>
                 <dependency>
@@ -921,9 +926,7 @@
             </dependencies>
         </profile>
         <profile>
-            <!--
-                Profile for monitoring the application with Prometheus.
-            -->
+            <!-- Profile for monitoring the application with Prometheus. -->
             <id>prometheus</id>
             <dependencies>
                 <dependency>
@@ -944,11 +947,8 @@
             </dependencies>
         </profile>
         <profile>
-            <!--
-                Profile for applying IDE-specific configuration.
-                At the moment it only configures MapStruct, which you need when working
-                with DTOs.
-            -->
+            <!-- Profile for applying IDE-specific configuration. At the moment it 
+				only configures MapStruct, which you need when working with DTOs. -->
             <id>IDE</id>
             <dependencies>
                 <dependency>

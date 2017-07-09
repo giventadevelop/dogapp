@@ -15,13 +15,25 @@
     </div>
     <br/>
     
+   <div ng-show="loadingSpinner">  
+     <img  ng-src="content/images/spinner-gif.gif" alt="spinnerloader"/>
+   </div>  
+    
+     {{loadingSpinner}}
     <md-grid-list md-cols-sm="2" md-cols-md="4" md-cols-lg="8" md-cols-gt-lg="12">
       <md-grid-tile  ng-repeat="dog in vm.dogs track by dog.id">
-       <a ui-sref="dog-detail({id:dog.id})"><img  style="height:50px;width:50px;border-width:0px;" 
-	     alt="dog image" src="api/dogs/image/{{dog.id}}" title="dog image"></a>
+        <!-- <a ui-sref="dog-detail({id:dog.id})"><img  style="height:50px;width:50px;border-width:0px;" 
+	     alt="dog image" src="api/dogs/image/{{dog.id}}" title="dog image"></a>  -->
+	     <img  src="data:image/jpeg;base64,{{dog.base64EncodedImg}}" />
+	     <input id="dogId_{{dog.id}}" type="checkbox" ng-checked="{{dog.userName==dog.loggedInUserName}}"
+           ng-disabled="{{dog.userName==dog.loggedInUserName}}"
+           
+           ng-model="saveUser"
+           ng-change='saveUserDog("{{dog.id}}", "{{dog.loggedInUserName}}")'>
+         
       </md-grid-tile>
     </md-grid-list>
-    
+   
     <div class="text-center">
         <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
         <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>

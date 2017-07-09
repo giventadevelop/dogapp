@@ -1,9 +1,11 @@
 package com.dogapp.repository;
 
 import com.dogapp.domain.Dog;
+import com.dogapp.service.dto.DogUserDogDTO;
 import com.dogapp.service.dto.GroupByDogBreedDTO;
 
 import org.springframework.data.jpa.repository.*;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -22,5 +24,19 @@ public interface DogRepository extends JpaRepository<Dog,Long> {
 	 @Query("select new com.dogapp.service.dto.GroupByDogBreedDTO(dg_breed.breedName, count(dg_breed.breedName)) from Dog dg "+ 
 		        "INNER JOIN DogBreed dg_breed ON dg.dogbreed = dg_breed.id GROUP BY dg_breed.breedName")
 			    List<GroupByDogBreedDTO> getGroupByDogBreed();
+	 
+	 @Query("select new com.dogapp.service.dto.DogUserDogDTO(dg.id, usrdg.username, dg.dogPicture) from Dog dg "+ 
+		        "LEFT JOIN UserDog usrdg ON dg.id = usrdg.dog ")
+			    List<DogUserDogDTO> getDogUserDog();
+	
+	/* @Query("select loggedInUserName=:loggedInUserName , dg.id,usrdg.username from dog dg LEFT JOIN user_dog usrdg ON dg.id = usrdg.dog_id  ")
+	 List<Object[]> getDogUserDog(@Param("loggedInUserName") String loggedInUserName);
+	*/		  //  List<DogUserDogDTO> getDogUserDog(@Param("loggedInUserName") String loggedInUserName);
+	
+	 
+	 /*@Modifying
+     @Query("update Product p set p.description = :description where p.productId = :productId")
+     Integer setNewDescriptionForProduct(@Param("productId") String productId,
+     @Param("description") String description);*/
 
 }

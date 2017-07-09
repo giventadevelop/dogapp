@@ -94,6 +94,21 @@ public class UserDogResource {
      * @param id the id of the userDogDTO to retrieve
      * @return the ResponseEntity with status 200 (OK) and with body the userDogDTO, or with status 404 (Not Found)
      */
+    @GetMapping("/user-dogs/{username}")
+    @Timed
+    public ResponseEntity<UserDogDTO> getUserDogsVote(@PathVariable String username) {
+        log.debug("REST request to get UserDog : {}", username);
+       // UserDogDTO userDogDTO = userDogService.findAll();
+       // return ResponseUtil.wrapOrNotFound(Optional.ofNullable(userDogDTO));
+        return null;
+    }
+    
+    /**
+     * GET  /user-dogs/:id : get the "id" userDog.
+     *
+     * @param id the id of the userDogDTO to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the userDogDTO, or with status 404 (Not Found)
+     */
     @GetMapping("/user-dogs/{id}")
     @Timed
     public ResponseEntity<UserDogDTO> getUserDog(@PathVariable Long id) {

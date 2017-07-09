@@ -5,6 +5,7 @@ import com.dogapp.service.DogService;
 import com.dogapp.web.rest.util.HeaderUtil;
 import com.dogapp.web.rest.util.PaginationUtil;
 import com.dogapp.service.dto.DogDTO;
+import com.dogapp.service.dto.DogUserDogDTO;
 import com.dogapp.service.dto.GroupByDogBreedDTO;
 
 import io.swagger.annotations.ApiParam;
@@ -16,6 +17,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -97,11 +99,15 @@ public class DogResource {
      */
     @GetMapping("/dogs")
     @Timed
-    public ResponseEntity<List<DogDTO>> getAllDogs(@ApiParam Pageable pageable) {
-        log.debug("REST request to get a page of Dogs");
-        Page<DogDTO> page = dogService.findAll(pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/dogs");
-        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    public ResponseEntity<List<DogUserDogDTO>> getAllDogs(@ApiParam Pageable pageable) {
+    	log.debug("REST request to get a page of Dogs");
+    //    Page<DogDTO> page = dogService.findAll(pageable);
+        String loggedInUserName=SecurityContextHolder.getContext().getAuthentication().getName();
+        Page<DogUserDogDTO> pageUserDog = dogService.getDogUserDog(pageable, loggedInUserName);
+      //  HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/dogs");
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(pageUserDog, "/api/dogs");
+       // return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+        return new ResponseEntity<>(pageUserDog.getContent(), headers, HttpStatus.OK);
     }
 
     /**
